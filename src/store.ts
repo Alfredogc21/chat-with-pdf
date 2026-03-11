@@ -28,3 +28,44 @@ export const setAppStatusChatMode = (
   appStatus.set(APP_STATUS.CHAT_MODE)
   appStatusInfo.set({ id, url, pages })
 }
+
+// Theme: 'light' | 'dark' | 'system'
+export type ThemeMode = 'light' | 'dark' | 'system'
+export const themeMode = writable<ThemeMode>('system')
+
+export const setThemeMode = (mode: ThemeMode) => {
+  themeMode.set(mode)
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('theme', mode)
+  }
+  applyTheme(mode)
+}
+
+export const applyTheme = (mode: ThemeMode) => {
+  if (typeof document === 'undefined') return
+  const root = document.documentElement
+  if (mode === 'system') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    root.classList.toggle('dark', prefersDark)
+    root.classList.toggle('light', !prefersDark)
+  } else {
+    root.classList.toggle('dark', mode === 'dark')
+    root.classList.toggle('light', mode === 'light')
+  }
+}
+
+export const initTheme = () => {
+  if (typeof localStorage === 'undefined') return
+  const saved = localStorage.getItem('theme') as ThemeMode | null
+  const mode = saved || 'system'
+  themeMode.set(mode)
+  applyTheme(mode)
+
+  // Listen for system preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    const current = localStorage.getItem('theme') as ThemeMode | null
+    if (!current || current === 'system') {
+      applyTheme('system')
+    }
+  })
+}

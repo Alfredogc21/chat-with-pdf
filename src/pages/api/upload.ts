@@ -7,8 +7,8 @@ import {
 } from 'cloudinary';
           
 cloudinary.config({ 
-  cloud_name: 'dajnje2f9', 
-  api_key: '589892356882585', // es pública
+  cloud_name: 'dhpkzgzgn', 
+  api_key: '989161351865963',
   api_secret: import.meta.env.CLOUDINARY_SECRET
 });
 
