@@ -2,6 +2,8 @@
 
 Aplicación web que permite subir un documento PDF y hacerle preguntas usando inteligencia artificial. El texto del PDF se extrae automáticamente mediante OCR y se utiliza como contexto para responder preguntas con Gemini.
 
+![Interfaz de la aplicación](public/images/interfaz.png)
+
 ## Tech Stack
 
 - **Astro** — Framework web con SSR (Node adapter)
