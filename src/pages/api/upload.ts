@@ -8,7 +8,7 @@ import {
           
 cloudinary.config({ 
   cloud_name: 'dhpkzgzgn', 
-  api_key: '989161351865963',
+  api_key: '989161351865963', // Esto es público
   api_secret: import.meta.env.CLOUDINARY_SECRET
 });
 
