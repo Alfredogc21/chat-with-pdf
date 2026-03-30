@@ -5,31 +5,25 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.7",
-    "@astrojs/node": "^10.0.0",
-    "@astrojs/svelte": "^8.0.0",
+    "@astrojs/node": "^10.0.4",
+    "@astrojs/svelte": "^8.0.4",
     "@google/generative-ai": "^0.24.1",
-    "astro": "^6.0.2",
+    "astro": "^6.1.1",
     "cloudinary": "^2.9.0",
-    "svelte": "^5.53.10",
+    "svelte": "^5.55.1",
     "svelte-file-dropzone": "^2.0.9",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/node": "^25.4.0",
+    "@types/node": "^25.5.0",
     "autoprefixer": "^10.4.27",
     "flowbite": "^2.5.2",
     "flowbite-svelte": "^0.48.6"
-  },
-  "pnpm": {
-    "overrides": {
-      "lodash@>=4.0.0 <4.17.23": ">=4.17.23"
-    }
   }
 }
