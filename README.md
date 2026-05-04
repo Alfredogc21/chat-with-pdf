@@ -36,8 +36,22 @@ cp .env.example .env
 
 ```env
 CLOUDINARY_SECRET="tu_api_secret"
-GEMINI_KEY="tu_api_key"
+
+# Configuración IA (por defecto Gemini)
+AI_PROVIDER="gemini"
+AI_MODEL="gemini-2.5-flash"
+GEMINI_KEY="tu_api_key_de_google_ai_studio"
+
+# Solo si usas NVIDIA NIM (API OpenAI-compatible)
+NVIDIA_API_KEY="tu_api_key_de_nvidia"
+NVIDIA_BASE_URL="https://integrate.api.nvidia.com/v1"
 ```
+
+### Cambiar proveedor o modelo
+
+- Usa `AI_PROVIDER="gemini"` para Google Gemini.
+- Usa `AI_PROVIDER="nvidia"` para NVIDIA NIM.
+- Cambia `AI_MODEL` por el nombre del modelo que quieras usar (por ejemplo `gemini-2.5-flash` o `z-ai/glm-4.7`).
 
 ## Desarrollo
 
