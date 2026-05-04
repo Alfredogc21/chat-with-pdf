@@ -25,5 +25,12 @@
     "autoprefixer": "^10.4.27",
     "flowbite": "^2.5.2",
     "flowbite-svelte": "^0.48.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "defu": "^6.1.5",
+      "lodash": "^4.18.0",
+      "postcss": "^8.5.10"
+    }
   }
 }
