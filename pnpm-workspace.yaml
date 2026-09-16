@@ -2,12 +2,31 @@ allowBuilds:
   esbuild: true
   sharp: false
 
+# Overrides de seguridad: fuerzan versiones parcheadas en dependencias
+# transitivas que no podemos actualizar desde package.json.
+# Cada entrada indica el advisory que resuelve.
 overrides:
+  # --- Vulnerabilidades resueltas ---
+  # GHSA-5p4m-2wfm-xmqj  (CVE-2026-59870) + GHSA-2883-xcg3-v3hh -> >=4.3.2
+  # Se mantiene en la linea 4.x a proposito: js-yaml 5.x es un major con
+  # cambios de API que astro todavia no soporta.
+  js-yaml: ^4.3.2
+  # GHSA-2v37-7h3g-55p8 -> >=3.3.18 (postcss depende de nanoid ^3)
+  'nanoid@3': ^3.3.19
+  # GHSA-c83g-rgw3-j3cx + GHSA-73wf-gq98-2v4g -> >=4.28.7
+  browserslist: ^4.29.0
+  # GHSA-w5vr-8v7q-w6rv -> >=2.11.0
+  baseline-browser-mapping: ^2.11.24
+  # GHSA-rgj7-g3m4-5g8c (libheif) -> >=0.35.4
+  sharp: ^0.35.4
+  # GHSA-w27v-7q3p-w38r + GHSA-4vpr-x523-8j87 -> >=4.1.0
+  svgo: ^4.1.0
+  # GHSA-7w5x-hrqm-74c2 -> >=1.7.1
+  smol-toml: ^1.8.0
+
+  # --- Overrides previos (ya parcheados) ---
   defu: ^6.1.5
   lodash: ^4.18.0
   postcss: ^8.5.18
   devalue: '>=5.8.1'
   esbuild: '>=0.28.1'
-  js-yaml: ^4.2.0
-  svgo: ^4.0.2
-  sharp: ^0.35.0
