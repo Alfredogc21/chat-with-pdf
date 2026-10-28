@@ -10,10 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.5",
+    "@astrojs/node": "^11.1.9",
     "@astrojs/svelte": "^9.0.1",
     "@google/generative-ai": "^0.24.1",
-    "astro": "^7.3.2",
+    "astro": "^7.4.2",
     "cloudinary": "^2.9.0",
     "svelte": "^5.56.2",
     "svelte-file-dropzone": "^2.0.9",

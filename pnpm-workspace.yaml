@@ -6,8 +6,7 @@ allowBuilds:
 # transitivas que no podemos actualizar desde package.json.
 # Cada entrada indica el advisory que resuelve.
 overrides:
-  # --- Vulnerabilidades resueltas ---
-  # GHSA-5p4m-2wfm-xmqj  (CVE-2026-59870) + GHSA-2883-xcg3-v3hh -> >=4.3.2
+  # GHSA-5p4m-2wfm-xmqj (CVE-2026-59870) + GHSA-2883-xcg3-v3hh -> >=4.3.2
   # Se mantiene en la linea 4.x a proposito: js-yaml 5.x es un major con
   # cambios de API que astro todavia no soporta.
   js-yaml: ^4.3.2
@@ -17,16 +16,30 @@ overrides:
   browserslist: ^4.29.0
   # GHSA-w5vr-8v7q-w6rv -> >=2.11.0
   baseline-browser-mapping: ^2.11.24
-  # GHSA-rgj7-g3m4-5g8c (libheif) -> >=0.35.4
-  sharp: ^0.35.4
+  # GHSA-rgj7-g3m4-5g8c (libheif) + GHSA-wq5f-xc86-pv6w (librsvg,
+  # CVE-2026-96889) -> >=0.35.5
+  sharp: ^0.35.5
   # GHSA-w27v-7q3p-w38r + GHSA-4vpr-x523-8j87 -> >=4.1.0
   svgo: ^4.1.0
-  # GHSA-7w5x-hrqm-74c2 -> >=1.7.1
-  smol-toml: ^1.8.0
+  # GHSA-7w5x-hrqm-74c2 + DoS adicional en 1.8.0 -> >=1.8.1
+  smol-toml: ^1.9.1
+  # 8 advisories (uneval/stringify de memoria compartida, expansion
+  # cuadratica, unhandled rejection en stringifyAsync, revivers de
+  # ArrayBuffer) -> >=5.9.3. Se queda en 5.x: la 6.x es un major.
+  devalue: ^5.9.4
+  # GHSA-ch52-4w7c-c8xp (fuga de respuestas cacheadas entre usuarios) -> >=4.2.1
+  http-cache-semantics: ^4.3.0
+  # GHSA-68fv-2mgg-jv7q (DoS del event loop) -> >=1.2.2
+  source-map-js: ^1.2.2
+  # 8 advisories de undici -> >=8.12.2
+  undici: ^8.12.3
+  # GHSA-587h-7wmj-h5pm (bypass de launch-editor en Windows) y otros -> >=8.1.6
+  vite: ^8.3.5
+  # GHSA-9jrq-w75r-8gcw (agotamiento de memoria al validar) -> >=4.6.6
+  zod: ^4.6.7
 
   # --- Overrides previos (ya parcheados) ---
   defu: ^6.1.5
   lodash: ^4.18.0
   postcss: ^8.5.18
-  devalue: '>=5.8.1'
   esbuild: '>=0.28.1'
