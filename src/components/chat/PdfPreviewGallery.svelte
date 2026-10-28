@@ -21,31 +21,33 @@
     <span>Vista previa del documento</span>
   </div>
 
-  <div class="preview-gallery__grid">
-    {#each images as image, index (image.page)}
-      <button
-        type="button"
-        class="preview-gallery__thumb"
-        style="animation-delay: {index * 0.08}s"
-        on:click={() => openPreview(image, index)}
-        aria-label={`Ver página ${image.page} en grande`}
-      >
-        <img
-          class="preview-gallery__thumb-image"
-          src={image.thumbnailUrl}
-          alt={image.alt}
-          loading="lazy"
-        />
+  <div class="preview-gallery__viewport">
+    <div class="preview-gallery__grid">
+      {#each images as image, index (image.page)}
+        <button
+          type="button"
+          class="preview-gallery__thumb"
+          style="animation-delay: {index * 0.08}s"
+          on:click={() => openPreview(image, index)}
+          aria-label={`Ver página ${image.page} en grande`}
+        >
+          <img
+            class="preview-gallery__thumb-image"
+            src={image.thumbnailUrl}
+            alt={image.alt}
+            loading="lazy"
+          />
 
-        <div class="preview-gallery__thumb-overlay" aria-hidden="true">
-          <span class="preview-gallery__zoom-hint">Zoom</span>
-        </div>
+          <div class="preview-gallery__thumb-overlay" aria-hidden="true">
+            <span class="preview-gallery__zoom-hint">Zoom</span>
+          </div>
 
-        <div class="preview-gallery__thumb-page" aria-hidden="true">
-          <span>{image.page}</span>
-        </div>
-      </button>
-    {/each}
+          <div class="preview-gallery__thumb-page" aria-hidden="true">
+            <span>{image.page}</span>
+          </div>
+        </button>
+      {/each}
+    </div>
   </div>
 </div>
 
@@ -76,16 +78,43 @@
     letter-spacing: 0.05em;
   }
 
-  .preview-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+  /* Container used to size the grid so that exactly 2 rows are visible */
+  .preview-gallery__viewport {
+    container-type: inline-size;
   }
 
-  @media (min-width: 740px) {
-    .preview-gallery__grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+  .preview-gallery__grid {
+    --gallery-columns: 3;
+    --gallery-visible-rows: 2;
+    --gallery-gap: 0.75rem;
+    --gallery-pad: 0.25rem;
+    --gallery-scrollbar: 8px;
+    --gallery-thumb-ratio: 1.35; /* 540 / 400, same as the thumbnail image */
+    --gallery-thumb-border: 2px;
+
+    --gallery-col-width: calc(
+      (
+        100cqw - (var(--gallery-pad) * 2) - var(--gallery-scrollbar) -
+          (var(--gallery-columns) - 1) * var(--gallery-gap)
+      ) / var(--gallery-columns)
+    );
+    --gallery-row-height: calc(
+      var(--gallery-col-width) * var(--gallery-thumb-ratio) + var(--gallery-thumb-border)
+    );
+
+    display: grid;
+    grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));
+    gap: var(--gallery-gap);
+    padding: var(--gallery-pad);
+    max-height: calc(
+      var(--gallery-row-height) * var(--gallery-visible-rows) +
+        var(--gallery-gap) * (var(--gallery-visible-rows) - 1)
+    );
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--app__scrollbar-thumb, rgba(139, 92, 246, 0.3)) transparent;
   }
 
   .preview-gallery__thumb {
